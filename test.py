@@ -1,10 +1,19 @@
 from pipeline import Pipeline
+from pipeline.helpers import openers
+from pipeline.helpers import wrappers
 
-app = Pipeline(port=3000)
+# THIS IS JUST A TEST!
 
-def read_clients(ctx):
-    pass
+user = {
+    "name": "Joe",
+    "password": "Goldberg"
+}
 
-app.get("/api", )
+app = Pipeline()
 
-app.run
+def read_all_users(ctx) -> str:
+    return wrappers.json(user)
+
+app.get("/api/users", read_all_users)
+
+app.run(3000)
