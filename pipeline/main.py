@@ -19,5 +19,8 @@ class Pipeline:
     def put(self, path: str, controller: Callable[[Context], str]) -> None:
         pass
 
+    def patch(self, path: str, controller: Callable[[Context], str]) -> None:
+        pass
+
     def delete(self, path: str, controller: Callable[[Context], str]) -> None:
         pass
