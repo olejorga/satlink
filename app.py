@@ -1,23 +1,28 @@
 from pipeline import Pipeline
-from pipeline.helpers import wrappers
+from pipeline.responses import Response, TEXTResponse, JSONResponse
 
-users = []
+
+users = [
+    {'name': 'Armin'},
+    {'name': 'Sebastian'}
+]
 
 app = Pipeline()
 
-def read_user_by_id(ctx):
-    for user in users:
-        if user["id"] == ctx.path["id"]:
-            return wrappers.json(user)
+@app.post('/users')
+def create_user():
+    return TEXTResponse('Hello World!')
 
-    return wrappers.json(user)
-    return wrappers.error(404, "dddd")
+@app.get('/users')
+def read_all_users():
+    return Response("Hello World", )
 
-app.get("/users/[id]", read_user_by_id)
+@app.patch('/users/<id>')
+def update_user(req):
+    pass
 
-@app.get("/users")
-def read_all_users(ctx):
-    ctx.res.code = 400
-    ctx.res.body = {}
+@app.delete('/users/<id>')
+def delete_user(req):
+    pass
 
-    return ctx
+app.run()
