@@ -1,39 +1,16 @@
 from typing import Callable
+from .context import Context
 
 
 class Pipeline:
-    DEFAULT_PORT = 3000
 
-    def __init__(self, port: int = DEFAULT_PORT):
+    def __init__(self) -> None:
         pass
 
-    def run(self, port: int = DEFAULT_PORT) -> None:
-        pass
-
-    def route(self):
+    def run(self, port: int = 3000) -> None:
         pass
     
     def get(self, path: str) -> None:
-        def inner(handler: Callable[[any], any]):
-            pass
-        return inner
-
-    def post(self, path: str) -> None:
-        def inner(handler: Callable[[any], any]):
-            pass
-        return inner
-
-    def put(self, path: str) -> None:
-        def inner(handler: Callable[[any], any]):
-            pass
-        return inner
-
-    def patch(self, path: str) -> None:
-        def inner(handler: Callable[[any], any]):
-            pass
-        return inner
-
-    def delete(self, path: str) -> None:
-        def inner(handler: Callable[[any], any]):
-            pass
+        def inner(handler: Callable[[Context], any]):
+            handler(Context())
         return inner
