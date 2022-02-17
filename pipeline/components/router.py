@@ -9,6 +9,8 @@ class Router:
         self.routes.append((pattern, handler))
 
     def match(self, path):
+        path = path[:-1] if path.endswith('/') and path != "/" else path
+
         for (pattern, handler) in self.routes:
             m = RE_MATCHER(pattern, path)
             if m:
