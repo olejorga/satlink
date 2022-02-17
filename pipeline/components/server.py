@@ -1,13 +1,21 @@
-from http.server import BaseHTTPRequestHandler
+from .request import Request
+from .response import Response
+from .router import Router
 
 
-class Server(BaseHTTPRequestHandler):
-    
-    def do_GET(self):
-        self.wfile.write()
+class Server:
+    router: Router
 
-    def do_POST(self):
-        content_length = int(self.headers['Content-Length'])
-        post_data = self.rfile.read(content_length)
+    @classmethod
+    def create(cls, environ, start_response):
+        try:
+            request = Request(environ)
+            handler, args = cls.router.match(request._environ['PATH_INFO'])
+            response = handler(request, *args)
 
-        self.wfile.write()
+        except:
+            response = Response("NOT FOUND!", 404)
+
+        start_response(response.status, response.headers.items())
+
+        return response

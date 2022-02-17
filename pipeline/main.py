@@ -1,22 +1,23 @@
 from typing import Callable
-from .components.context import Context
+from wsgiref.simple_server import make_server
+from .components.server import Request
+from .components.router import Router
 from .components.server import Server
 
 
 class Pipeline:
 
-    def __init__(self) -> None:
-        self.__server = Server()
+    def __init__(self):
+        self.router = Router()
 
-    def run(self, port: int = 3000) -> None:
-        pass
+    def run(self, port: int = 3000):
+        self.server = Server
+        self.server.router = self.router
+
+        with make_server('', 3000, self.server.create) as app:
+            app.serve_forever()
     
-    def get(self, path: str) -> None:
-        def inner(handler: Callable[[Context], any]):
-            handler(Context())
-        return inner
-
-    def post(self, path: str) -> None:
-        def inner(handler: Callable[[Context], any]):
-            handler(Context())
+    def route(self, path: str):
+        def inner(handler: Callable[[Request], any]):
+            self.router.add_route(path, handler)
         return inner
