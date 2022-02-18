@@ -1,14 +1,14 @@
 class Router:
-    def __init__(self) -> None:
-        self.routes = []
+    def __init__(self):
+        self.__routes = []
 
-    def add_route(self, pattern, handler):
-        self.routes.append((pattern, handler))
+    def add_route(self, pattern, handler) -> None:
+        self.__routes.append((pattern, handler))
 
-    def match(self, path):
+    def match(self, path) -> tuple:
         path = path[:-1] if path.endswith('/') and path != "/" else path
 
-        for (pattern, handler) in self.routes:
+        for (pattern, handler) in self.__routes:
             pattern = pattern[:-1] if pattern.endswith('/') and pattern != "/" else pattern
             pattern = pattern.split('/')
             current_path = path.split('/')

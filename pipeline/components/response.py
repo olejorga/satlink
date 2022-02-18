@@ -4,16 +4,27 @@ from wsgiref.headers import Headers
 
 class Response:
 
-    def __init__(self, body: str = '', status: int = 200) -> None:
+    def __init__(
+        self, 
+        body: str = '', 
+        status: int = 200,
+        content_type: str = 'text/plain',
+        charset: str = 'utf-8'
+        ):
         self.headers = Headers()
-        self.headers.add_header('content-type', 'text/html; charset=utf-8')
-        self._status_code = status
-        self.body = body
+        self.headers.add_header('content-type', f'{content_type}; charset={charset}')
+        self.headers.add_header('content-length', f'{len(body.encode(charset))}')
+        self._body = body
+        self._status = status
 
     @property
-    def status(self):
-        status_message = HTTP_STATUSES.get(self._status_code, 'UNKNOWN')
-        return f"{self._status_code} {status_message}"
+    def body(self) -> str:
+        return self._body
+
+    @property
+    def status(self) -> str:
+        status_message = HTTP_STATUSES.get(self._status, 'UNKNOWN')
+        return f"{self._status} {status_message}"
 
     def __iter__(self):
         for k in self.body:
