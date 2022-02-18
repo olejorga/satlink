@@ -1,6 +1,3 @@
-from re import match as RE_MATCHER
-
-
 class Router:
     def __init__(self) -> None:
         self.routes = []
@@ -9,10 +6,19 @@ class Router:
         self.routes.append((pattern, handler))
 
     def match(self, path):
-        path = path[:-1] if path.endswith('/') and path != "/" else path
-
         for (pattern, handler) in self.routes:
-            m = RE_MATCHER(pattern, path)
-            if m:
-                return (handler, m.groups())
-            print('SHIT!')
+            this_pattern = pattern.split('/')
+            this_path = path.split('/')
+
+            if len(this_path) == len(this_pattern):
+                args = []
+
+                for i, key in enumerate(this_pattern):
+                    if key.startswith(':'):
+                        args.append(this_path[i])
+
+                    elif key != this_path[i]:
+                        break
+
+                    if i == len(this_pattern) - 1:
+                        return (handler, tuple(args))
