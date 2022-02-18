@@ -8,16 +8,16 @@ from .components.server import Server
 class Pipeline:
 
     def __init__(self):
-        self.router = Router()
+        self.get_router = Router()
 
     def run(self, port: int = 3000):
         self.server = Server
-        self.server.router = self.router
+        self.server.get_router = self.get_router
 
         with make_server('', 3000, self.server.create) as app:
             app.serve_forever()
     
-    def route(self, path: str):
+    def get(self, path: str):
         def inner(handler: Callable[[Request], any]):
-            self.router.add_route(path, handler)
+            self.get_router.add_route(path, handler)
         return inner

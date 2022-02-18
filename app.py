@@ -21,7 +21,7 @@ app = Pipeline()
 
 
 # STEP 4: Add a dynamic route as a GET method - with a handler
-@app.route('/users/:index')
+@app.get('/users/:index')
 def read_user_by_index(req, index):
     try:
         return Response(str(users[int(index)]))
@@ -30,11 +30,11 @@ def read_user_by_index(req, index):
 
 
 # STEP 5: Add a route as a GET method - with a handler
-@app.route('/users')
+@app.get('/users')
 def read_all_users(req):
     return Response(str(users))
 
-@app.route('/hello/:name')
+@app.get('/hello/:name')
 def greet(req, name):
     return Response(f"Hello {name}!")
 

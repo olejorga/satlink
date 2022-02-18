@@ -4,17 +4,22 @@ from .router import Router
 
 
 class Server:
-    router: Router
+    get_router: Router
 
     @classmethod
     def create(cls, environ, start_response):
         try:
+            method = environ['REQUEST_METHOD']
+
+            if method == "GET":
+                print("YES!")
+                handler, args = cls.get_router.match(environ['PATH_INFO'])
+            
             request = Request(environ)
-            handler, args = cls.router.match(request._environ['PATH_INFO'])
             response = handler(request, *args)
 
         except:
-            response = Response("NOT FOUND!", 404)
+            response = Response(str(environ), 404)
 
         start_response(response.status, response.headers.items())
 
