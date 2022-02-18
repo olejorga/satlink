@@ -9,6 +9,13 @@ class Request:
         self._params = params
 
     @property
+    def body(self):
+        length = int(self._environ['CONTENT_LENGTH'])
+        encoding = self._environ['LC_CTYPE']
+
+        return self._environ['wsgi.input'].read(length).decode(encoding)
+
+    @property
     def method(self):
         return self._environ['REQUEST METHOD']
 

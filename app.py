@@ -7,6 +7,7 @@
 '''
 
 # STEP 1: Import pipeline
+import json
 from pipeline import Pipeline
 from pipeline.components.response import Response
 
@@ -34,20 +35,14 @@ def read_user_by_index(req):
 def read_all_users(req):
     return Response(str(users))
 
-@app.get('/hello/:name/and/:other/')
-def greet(req):
-    return Response(f"Hello {req.params['name']}! ... and {req.params['other']}!")
-
 
 # STEP 6: Add a route as a POST method - with a handler
-'''
 @app.post('/users')
-def create_user(ctx):
-    user = ctx.body
+def create_user(req):
+    user = json.loads(req.body)
     users.append(user)
 
-    return Response('User was created', 201)
-'''
+    return Response('User created', 201)
 
 
 # STEP 7: Start the app
