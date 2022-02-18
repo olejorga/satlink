@@ -6,19 +6,22 @@ class Router:
         self.routes.append((pattern, handler))
 
     def match(self, path):
+        path = path[:-1] if path.endswith('/') and path != "/" else path
+
         for (pattern, handler) in self.routes:
-            this_pattern = pattern.split('/')
-            this_path = path.split('/')
+            pattern = pattern[:-1] if pattern.endswith('/') and pattern != "/" else pattern
+            pattern = pattern.split('/')
+            current_path = path.split('/')
 
-            if len(this_path) == len(this_pattern):
-                args = []
+            if len(current_path) == len(pattern):
+                args = {}
 
-                for i, key in enumerate(this_pattern):
+                for i, key in enumerate(pattern):
                     if key.startswith(':'):
-                        args.append(this_path[i])
+                        args[key[1:]] = current_path[i]
 
-                    elif key != this_path[i]:
+                    elif key != current_path[i]:
                         break
 
-                    if i == len(this_pattern) - 1:
-                        return (handler, tuple(args))
+                    if i == len(pattern) - 1:
+                        return (handler, args)
