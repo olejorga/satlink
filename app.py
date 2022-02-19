@@ -10,7 +10,7 @@
 # STEP 1: Import pipeline
 import json
 from pipeline import Pipeline
-from pipeline.components.response import Response
+from pipeline.components.response import Response, JSONResponse
 
 
 # STEP 2: Create a dummy user database
@@ -26,14 +26,14 @@ app = Pipeline()
 # STEP 2: Add a route as a GET method - with a handler
 @app.get('/users')
 def read_all_users(req):
-    return Response(str(users))
+    return JSONResponse(users)
 
 
 # STEP 5: Add a dynamic route as a GET method - with a handler
 @app.get('/users/:index')
 def read_user_by_index(req):
     try:
-        return Response(str(users[int(req.params['index'])]))
+        return JSONResponse(users[int(req.params['index'])])
     except:
         return Response('User not found', 500)
 
