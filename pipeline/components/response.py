@@ -1,5 +1,6 @@
 from http.client import responses as HTTP_STATUSES
 from wsgiref.headers import Headers
+from json import dumps as json_dumps
 
 
 class Response:
@@ -14,12 +15,12 @@ class Response:
         self.headers = Headers()
         self.headers.add_header('content-type', f'{content_type}; charset={charset}')
         self.headers.add_header('content-length', f'{len(body.encode(charset))}')
-        self._body = body
+        self._body = str(body)
         self._status = status
 
     @property
     def body(self) -> str:
-        return self._body
+        return str(self._body)
 
     @property
     def status(self) -> str:
@@ -32,3 +33,15 @@ class Response:
                 yield k
             else:
                 yield k.encode('utf-8')
+
+
+class JSONResponse(Response):
+
+    def __init__(self, data: dict | list = {}, status: int = 200):
+        super().__init__(json_dumps(data), status, 'application/json')
+
+
+class HTMLResponse(Response):
+
+    def __init__(self, html: str = '', status: int = 200):
+        super().__init__(html, status, 'text/html')
