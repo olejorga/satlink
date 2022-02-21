@@ -11,7 +11,7 @@ class Response:
         status: int = 200,
         content_type: str = 'text/plain',
         charset: str = 'utf-8'
-        ):
+    ):
         self.headers = Headers()
         self.headers.add_header('content-type', f'{content_type}; charset={charset}')
         self.headers.add_header('content-length', f'{len(body.encode(charset))}')
@@ -42,6 +42,12 @@ class JSONResponse(Response):
 
 
 class HTMLResponse(Response):
+
+    def __init__(self, html: str = '', status: int = 200):
+        super().__init__(html, status, 'text/html')
+
+
+class CSVResponse(Response):
 
     def __init__(self, html: str = '', status: int = 200):
         super().__init__(html, status, 'text/html')
