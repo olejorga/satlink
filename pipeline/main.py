@@ -40,7 +40,7 @@ class Pipeline:
         except KeyboardInterrupt:
             app.server_close()
     
-    def get(self, route: str) -> Callable[[]]:
+    def get(self, route: str) -> Callable[[Callable[[Request], Response]], None]:
         """
         Decorator for defining an endpoint with a GET-method and 
         a user specified controller function.
@@ -49,14 +49,14 @@ class Pipeline:
             route (str): Desired route within the domain.
 
         Returns:
-            Callable[[]]: Takes a controller as its only argument.
+            (Callable): Takes a controller as its only argument.
         """
         def inner(handler: Callable[[Request], Response]):
             self.__get_router.add_route(route, handler)
 
         return inner
 
-    def post(self, route: str) -> Callable[[]]:
+    def post(self, route: str) -> Callable[[Callable[[Request], Response]], None]:
         """
         Decorator for defining an endpoint with a POST-method and 
         a user specified controller function.
@@ -65,14 +65,14 @@ class Pipeline:
             route (str): Desired route within the domain.
 
         Returns:
-            Callable[[]]: Takes a controller as its only argument.
+            (Callable): Takes a controller as its only argument.
         """
         def inner(handler: Callable[[Request], Response]):
             self.__post_router.add_route(route, handler)
 
         return inner
 
-    def put(self, route: str) -> Callable[[]]:
+    def put(self, route: str) -> Callable[[Callable[[Request], Response]], None]:
         """
         Decorator for defining an endpoint with a PUT-method and 
         a user specified controller function.
@@ -81,14 +81,14 @@ class Pipeline:
             route (str): Desired route within the domain.
 
         Returns:
-            Callable[[]]: Takes a controller as its only argument.
+            (Callable): Takes a controller as its only argument.
         """
         def inner(handler: Callable[[Request], Response]):
             self.__put_router.add_route(route, handler)
 
         return inner
 
-    def delete(self, route: str) -> Callable[[]]:
+    def delete(self, route: str) -> Callable[[Callable[[Request], Response]], None]:
         """
         Decorator for defining an endpoint with a DELETE-method and 
         a user specified controller function.
@@ -97,7 +97,7 @@ class Pipeline:
             route (str): Desired route within the domain.
 
         Returns:
-            Callable[[]]: Takes a controller as its only argument.
+            (Callable): Takes a controller as its only argument.
         """
         def inner(handler: Callable[[Request], Response]):
             self.__delete_router.add_route(route, handler)
