@@ -3,7 +3,7 @@ from urllib.parse import parse_qs as query_parser
 
 class Request:
 
-    def __init__(self, environ: dict, params: dict):
+    def __init__(self, environ: dict, params: dict) -> None:
         self._environ = environ
         self._params = params
 

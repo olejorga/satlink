@@ -1,11 +1,14 @@
+from typing import Callable
+
+
 class Router:
-    def __init__(self):
+    def __init__(self) -> None:
         self.__routes = []
 
-    def add_route(self, pattern, handler) -> None:
+    def add_route(self, pattern: str, handler: Callable) -> None:
         self.__routes.append((pattern, handler))
 
-    def match(self, path) -> tuple:
+    def match(self, path: str) -> tuple:
         path = path[:-1] if path.endswith('/') and path != "/" else path
 
         for (pattern, handler) in self.__routes:

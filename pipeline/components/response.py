@@ -11,7 +11,7 @@ class Response:
         status: int = 200,
         content_type: str = 'text/plain',
         charset: str = 'utf-8'
-    ):
+    ) -> None:
         self.headers = Headers()
         self.headers.add_header('content-type', f'{content_type}; charset={charset}')
         self.headers.add_header('content-length', f'{len(body.encode(charset))}')
@@ -37,13 +37,13 @@ class Response:
 
 class JSONResponse(Response):
 
-    def __init__(self, data: dict | list = {}, status: int = 200):
+    def __init__(self, data: dict | list = {}, status: int = 200) -> None:
         super().__init__(json_dumps(data), status, 'application/json')
 
 
 class HTMLResponse(Response):
 
-    def __init__(self, html: str = '', status: int = 200):
+    def __init__(self, html: str = '', status: int = 200) -> None:
         super().__init__(html, status, 'text/html')
 
 

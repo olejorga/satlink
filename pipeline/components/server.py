@@ -1,3 +1,4 @@
+from typing import Callable
 from .request import Request
 from .response import Response
 from .router import Router
@@ -10,7 +11,7 @@ class Server:
     delete_router: Router
 
     @classmethod
-    def create(cls, environ, start_response):
+    def create(cls, environ: dict, start_response: Callable) -> Response:
         try:
             method = environ['REQUEST_METHOD']
 
