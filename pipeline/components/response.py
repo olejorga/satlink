@@ -34,6 +34,10 @@ class Response:
             else:
                 yield k.encode('utf-8')
 
+    def redirect(self, url: str) -> None:
+        self._status = 301
+        self.headers.add_header("location", url)
+
 
 class JSONResponse(Response):
 

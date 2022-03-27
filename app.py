@@ -62,6 +62,17 @@ def create_user(req):
     users.remove(users[int(req.params['index'])])
     return Response('User deleted')
 
+@app.get('/cart')
+def redirect(req):
+  res = Response()
+  res.redirect('/checkout')
+
+  return res
+
+@app.get('/checkout')
+def redirect(req):
+  return Response('WELCOME TO CHECKOUT!')
+
 
 # STEP 7: Start the app
 app.run()
