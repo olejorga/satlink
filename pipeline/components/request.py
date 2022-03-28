@@ -1,3 +1,4 @@
+from http.cookies import SimpleCookie
 from urllib.parse import parse_qs as query_parser
 
 
@@ -28,5 +29,15 @@ class Request:
 
     @property
     def query(self) -> dict:
-        parameters = query_parser(self._environ['QUERY_STRING'])
-        return {key:value[0] for key, value in parameters.items()}
+        params = query_parser(self._environ['QUERY_STRING'])
+        return {key:value[0] for key, value in params.items()}
+
+    @property
+    def cookies(self) -> dict:
+        cookies = SimpleCookie(self._environ['HTTP_COOKIE'])
+        box = {}
+        
+        for token, value in cookies.items():
+            box[token] = value.value
+
+        return box

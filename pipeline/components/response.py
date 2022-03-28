@@ -1,3 +1,4 @@
+from http import cookies
 from http.client import responses as HTTP_STATUSES
 from wsgiref.headers import Headers
 from json import dumps as json_dumps
@@ -36,7 +37,16 @@ class Response:
 
     def redirect(self, url: str) -> None:
         self._status = 301
-        self.headers.add_header("location", url)
+        self.headers.add_header('location', url)
+
+    def set_cookie(self, token: str, value: str):
+        cookie = cookies.SimpleCookie()
+        cookie[token] = value
+
+        self.headers.add_header('Set-Cookie', cookie.output(header=''))
+
+    def remove_cookie(self, token: str):
+        self.set_cookie(token, '')
 
 
 class JSONResponse(Response):

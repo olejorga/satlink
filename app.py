@@ -11,6 +11,7 @@
 import json
 from pipeline import Pipeline
 from pipeline.components.response import Response, JSONResponse
+from http import cookies
 
 
 # STEP 2: Create a dummy user database
@@ -64,14 +65,23 @@ def create_user(req):
 
 @app.get('/cart')
 def redirect(req):
-  res = Response()
-  res.redirect('/checkout')
+    res = Response()
+    res.redirect('/checkout')
 
-  return res
+    return res
 
 @app.get('/checkout')
 def redirect(req):
-  return Response('WELCOME TO CHECKOUT!')
+    return Response('WELCOME TO CHECKOUT!')
+
+@app.get('/test')
+def test(req):
+    print(req.cookies)
+
+    res = Response('Hello there...')
+    res.remove_cookie('Rebecca')
+
+    return res
 
 
 # STEP 7: Start the app
