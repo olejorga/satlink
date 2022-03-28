@@ -1,6 +1,9 @@
 '''
-
-    PIPELINE DEMO
+        ____  ________  ________    _____   ________
+       / __ \/  _/ __ \/ ____/ /   /  _/ | / / ____/
+      / /_/ // // /_/ / __/ / /    / //  |/ / __/   
+     / ____// // ____/ /___/ /____/ // /|  / /___   
+    /_/   /___/_/   /_____/_____/___/_/ |_/_____/   
 
     A short demonstration of the framework.
 
@@ -11,7 +14,6 @@
 import json
 from pipeline import Pipeline
 from pipeline.components.response import Response, JSONResponse
-from http import cookies
 
 
 # STEP 2: Create a dummy user database
