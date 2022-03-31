@@ -12,19 +12,17 @@ class Router:
         path = path[:-1] if path.endswith('/') and path != "/" else path
 
         for (pattern, handler) in self.__routes:
-            pattern = pattern[:-1] if pattern.endswith('/') and pattern != "/" else pattern
-            pattern = pattern.split('/')
-            current_path = path.split('/')
+            keys = pattern.split('/')[1:]
+            values = path.split('/')[1:]
 
-            if len(current_path) == len(pattern):
-                args = {}
+            if len(keys) == len(values):
+                params = {}
 
-                for i, key in enumerate(pattern):
-                    if key.startswith(':'):
-                        args[key[1:]] = current_path[i]
+                for i, key in enumerate(keys):
+                    if key.startswith('(') and key.endswith(')'):
+                        params[key[1:-1]] = values[i]
 
-                    elif key != current_path[i]:
-                        break
+                    elif key != values[i]:
+                        return None
 
-                    if i == len(pattern) - 1:
-                        return (handler, args)
+                return (handler, params)
