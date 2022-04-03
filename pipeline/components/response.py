@@ -14,8 +14,8 @@ class Response:
         charset: str = 'utf-8'
     ) -> None:
         self.headers = Headers()
-        self.headers.add_header('content-type', f'{content_type}; charset={charset}')
-        self.headers.add_header('content-length', f'{len(body.encode(charset))}')
+        self.headers.add_header('Content-Type', f'{content_type}; charset={charset}')
+        self.headers.add_header('Content-Length', f'{len(body.encode(charset))}')
         self._body = str(body)
         self._status = status
 
@@ -37,7 +37,7 @@ class Response:
 
     def redirect(self, url: str) -> None:
         self._status = 301
-        self.headers.add_header('location', url)
+        self.headers.add_header('Location', url)
 
     def set_cookie(self, token: str, value: str):
         cookie = cookies.SimpleCookie()

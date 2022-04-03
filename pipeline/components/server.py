@@ -24,7 +24,7 @@ class Server:
             elif method == "DELETE":
                 handler, params = cls.delete_router.match(environ['PATH_INFO'])
             else:
-                raise Exception
+                raise Exception(f"HTTP method not supported for route {environ['PATH_INFO']}")
             
             request = Request(environ, params)
             response = handler(request)

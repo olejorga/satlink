@@ -1,3 +1,4 @@
+from shutil import ExecError
 from typing import Callable
 
 
@@ -14,6 +15,8 @@ class Router:
         for (pattern, handler) in self.__routes:
             keys = pattern.split('/')[1:]
             values = path.split('/')[1:]
+            
+            print("--->", pattern)
 
             if len(keys) == len(values):
                 params = {}
@@ -23,6 +26,12 @@ class Router:
                         params[key[1:-1]] = values[i]
 
                     elif key != values[i]:
-                        return None
+                        break
 
-                return (handler, params)
+                    if i == len(keys) - 1:
+                        return (handler, params)
+                else:
+                    break
+                continue
+        
+        raise Exception(f"No controller found for route {path}")

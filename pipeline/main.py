@@ -54,7 +54,7 @@ class Pipeline:
 
         try:
             print('\u001b[38;5;246m') # Make console text grey
-            print(f'WELCOME - - Server started on http://{host}:{port}!')
+            print(f'Server started on http://{host}:{port}')
 
             with make_server(host, port, server.create) as app:
                 app.serve_forever()
