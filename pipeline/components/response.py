@@ -61,7 +61,11 @@ class HTMLResponse(Response):
         super().__init__(html, status, 'text/html')
 
 
-class CSVResponse(Response):
+class TemplateResponse(HTMLResponse):
 
-    def __init__(self, html: str = '', status: int = 200):
-        super().__init__(html, status, 'text/html')
+    def __init__(self, path: str, context: dict = {}, status: int = 200):
+        with open(path, 'r') as file:
+            template = file.read()
+            view = template.format(**context)
+
+        super().__init__(view, status)

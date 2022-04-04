@@ -11,7 +11,7 @@
 
 
 from pipeline import Pipeline
-from pipeline.components.response import Response, JSONResponse
+from pipeline.components.response import Response, JSONResponse, TemplateResponse
 
 
 users = [{'name': 'Jon'}, {'name': 'Eric'}]
@@ -21,7 +21,7 @@ app = Pipeline()
 
 @app.get('/')
 def index_view(req):
-    return Response('Hello World!')
+    return TemplateResponse('index.html', {'name': 'Adrian'})
 
 
 @app.get('/users')
