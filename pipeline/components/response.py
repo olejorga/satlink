@@ -39,13 +39,13 @@ class Response:
         self._status = 301
         self.headers.add_header('Location', url)
 
-    def set_cookie(self, token: str, value: str):
+    def set_cookie(self, token: str, value: str) -> None:
         cookie = cookies.SimpleCookie()
         cookie[token] = value
 
         self.headers.add_header('Set-Cookie', cookie.output(header=''))
 
-    def remove_cookie(self, token: str):
+    def remove_cookie(self, token: str) -> None:
         self.set_cookie(token, '')
 
 

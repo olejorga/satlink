@@ -1,0 +1,168 @@
+        _    ____ ___ 
+       / \  |  _ \_ _|
+      / _ \ | |_) | | 
+     / ___ \|  __/| | 
+    /_/   \_\_|  |___|
+    __________________
+    DOCUMENTATION v1.0
+
+
+    [QUICKSTART]
+        
+        Lets create a simple web app:
+
+            from pipeline import Pipeline, Response
+
+            app = Pipeline()
+
+            @app.get('/')
+            def index_view(req):
+                return Response('Hello World!')
+
+            app.run()
+
+    
+    [IMPORTS]
+
+        Everything can be imported directly from 
+        the "pipeline" package, as seen here:
+
+            from pipeline import ...
+                ... Pipeline
+                ... Response
+                ... JSONResponse
+                ... etc ...
+    
+
+    [MAIN]
+    
+        All methods from the "Pipeline" class:
+
+            .get(route: str)(controller: Callable)
+            .post(route: str)(controller: Callable)
+            .put(route: str)(controller: Callable)
+            .delete(route: str)(controller: Callable)
+
+                Takes a route as an argument and 
+                decorates a controller function.
+                The function must take at least 1 
+                argument.
+
+                Example:
+                    
+                    @app.get('/users')
+                    def read_users(req):
+                        pass
+
+                Controller functions follows the 
+                flow of "request-response" just 
+                like HTTP does. Therefor a 
+                controller takes a request object 
+                as an argument and returns a 
+                response object.
+
+            .run(port: int = 3000, host: str = localhost)
+
+                Takes a port and a hostname or 
+                hostip. Starts a server with 
+                these values.
+
+                Example:
+                    
+                    app.run(8080)
+
+        Route string api:
+
+            The route string passed to either a get, 
+            post, put or delete method can be formatted
+            so that it can take variables. Those 
+            parameters are passed to the controller 
+            function in a request object.
+
+            Example:
+
+                @app.get('/users/(id)')
+                def read_user(req):
+                    id = req.params['id']
+
+        Query api:
+
+            Applied query parameters are passed to the 
+            controller function in a request object.
+
+            Example:
+
+                # Request url: http://localhost:3000/users?id=1
+                @app.get('/users')
+                def read_user(req):
+                    id = req.query['id']
+
+        Response api:
+
+            Response(
+                body: str = '', 
+                status: int = 200,
+                content_type: str = 'text/plain',
+                charset: str = 'utf-8'
+            )
+
+            A response object is always returned from
+            a controller function, as seen in the 
+            quickstart example.
+
+            Properties:
+
+                body: str -- The main content of the webpage
+
+                method: str -- The http status code
+
+            Methods:
+
+                .set_cookie(key: str, value: str) 
+
+                .remove_cookie(key: str)
+
+            Descendants:
+
+                JSONResponse(data: dict | list = {}, status: int = 200)
+
+                HTMLResponse(html: str = '', status: int = 200)
+
+                TemplateResponse(path: str, context: dict = {}, status: int = 200)
+
+        Request api:
+
+            Request()
+
+            A request object is always passed to a
+            controller function, as seen in the 
+            quickstart example.
+
+            Properties:
+
+                body: str -- The main content of the webpage
+
+                method: str -- The method of requesting (i.e. get, post, ...)
+
+                params: dict -- The passed url parameters
+
+                path: str -- The path of the requested route
+
+                query: dict -- The applied query parameters
+
+                cookies: dict -- The clients' cookies
+
+
+    [HELPERS]
+
+        Parser api:
+
+            Parser()
+
+            Parsers are methods used to parse the 
+            request body, depending on what format
+            it is in.
+
+            Descendants:
+
+                JSONParse(raw: str) -> dict | list

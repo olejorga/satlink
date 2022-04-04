@@ -9,7 +9,10 @@
      / _  / , _/ /_/ / ,< / _// , _/ / / / _/_\ \  / /   
     /____/_/|_|\____/_/|_/___/_/|_| /_/ /___/___/ /_/                                                                         
 
-    Skriv kode som løser hvert scenario, lykke til!
+    Skriv kode som løser hvert scenario, bruk API 
+    dokumentasjonen i API.txt, docstrings og type hints 
+    som hjelp. Hvis dere står helt fast, spør utvikler. 
+    Lykke til!
 '''
 
 from pipeline import Pipeline, Response
