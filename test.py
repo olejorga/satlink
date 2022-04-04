@@ -11,7 +11,11 @@
 
     Skriv kode som løser hvert scenario, bruk API 
     dokumentasjonen i API.txt, docstrings og type hints 
-    som hjelp. Hvis dere står helt fast, spør utvikler. 
+    som hjelp. Hvis dere står helt fast, spør utvikler.
+
+    Anbefaler å bruke Postman, Insomnia eller Thunder 
+    Client i VS Code til å teste endepunktene.
+
     Lykke til!
 '''
 

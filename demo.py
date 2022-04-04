@@ -16,10 +16,4 @@ app = Pipeline()
 def index(req):
     return Response('Hello World!')
 
-
-@app.post('/')
-def x(req):
-    d = JSONParser.run(req.body)
-    return Response(d['name'])
-
 app.run()
