@@ -163,6 +163,14 @@
             request body, depending on what format
             it is in.
 
+            Methods:
+
+                .run(data: Any) -> Any
+
             Descendants:
 
-                JSONParse(raw: str) -> dict | list
+                JSONParse()
+
+                    Methods:
+
+                        .run(data: str) -> dict | list
