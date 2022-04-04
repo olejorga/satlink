@@ -15,8 +15,6 @@ class Router:
         for (pattern, handler) in self.__routes:
             keys = pattern.split('/')[1:]
             values = path.split('/')[1:]
-            
-            print("--->", pattern)
 
             if len(keys) == len(values):
                 params = {}
