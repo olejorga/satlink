@@ -11,7 +11,7 @@ class Request:
     @property
     def body(self) -> str:
         length = int(self._environ['CONTENT_LENGTH'])
-        charset = self._environ['LC_CTYPE']
+        charset = self._environ.get('LC_CTYPE', 'utf-8')
 
         return self._environ['wsgi.input'].read(length).decode(charset)
 
