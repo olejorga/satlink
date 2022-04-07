@@ -7,6 +7,10 @@ class Router:
         self.__routes = []
 
     def add_route(self, pattern: str, controller: Callable) -> None:
+        for route in self.__routes:
+            if route[0] == pattern:
+                raise Error(500, f'Route {pattern} already exists')
+
         self.__routes.append((pattern, controller))
 
     def match(self, path: str) -> tuple:
