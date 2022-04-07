@@ -1,8 +1,8 @@
 from typing import Callable
 from .request import Request
-from .response import Response
+from ..response import Response
 from .router import Router
-from .error import Error
+from ..error import Error
 
 
 class Server:

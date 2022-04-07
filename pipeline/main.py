@@ -1,9 +1,9 @@
 from typing import Callable
 from wsgiref.simple_server import make_server
-from .components.request import Request
+from .components.core.request import Request
 from .components.response import Response
-from .components.router import Router
-from .components.server import Server
+from .components.core.router import Router
+from .components.core.server import Server
 
 
 LOGO = """
