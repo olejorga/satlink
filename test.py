@@ -7,7 +7,7 @@
        ___  ___  __  ____ _________  ____________________
       / _ )/ _ \/ / / / //_/ __/ _ \/_  __/ __/ __/_  __/
      / _  / , _/ /_/ / ,< / _// , _/ / / / _/_\ \  / /   
-    /____/_/|_|\____/_/|_/___/_/|_| /_/ /___/___/ /_/                                                                         
+    /____/_/|_|\____/_/|_/___/_/|_| /_/ /___/___/ /_/   2                                                                      
 
     Skriv kode som løser hvert scenario, bruk API 
     dokumentasjonen i docs/API.md, docstrings og type hints 
@@ -128,9 +128,9 @@ med innhold: “<h1>Hello {name}!</h1>”, hvor “name” er en
 injisert variabel som skal settes til “Armin”.
 """
 
-@app.get('/')
-def index_view(req):
-    return TemplateResponse('index.html', {'name': 'Armin'})
+@app.get('/greeting') # <-- Felle for å vise feilhåndtering, endrer derfor route til "/greeting"
+def greeting_view(req):
+    return TemplateResponse('greeting.html', {'name': 'Armin'})
 
 """
 STARTING THE APP FOR ALL SCENARIOS
