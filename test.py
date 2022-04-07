@@ -10,7 +10,7 @@
     /____/_/|_|\____/_/|_/___/_/|_| /_/ /___/___/ /_/                                                                         
 
     Skriv kode som løser hvert scenario, bruk API 
-    dokumentasjonen i API.txt, docstrings og type hints 
+    dokumentasjonen i docs/API.md, docstrings og type hints 
     som hjelp. Hvis dere står helt fast, spør utvikler.
 
     Anbefaler å bruke Postman, Insomnia eller Thunder 
@@ -58,7 +58,7 @@ statuskoden 201. Brukeren er et json objekt.
 
 @app.post('/users')
 def create_user(req):
-    user = JSONParser.run(req.body)
+    user = JSONParser(req.body)
     users.append(user)
     return Response('User created!', 201)
 
@@ -118,12 +118,6 @@ klienten, med navn “product” og verdien “visited”.
 def product_view(req):
     res = Response()
     res.set_cookie('product', 'visited')
-    return res
-
-@app.get('/delete')
-def x(req):
-    res = Response()
-    res.remove_cookie('product')
     return res
 
 """

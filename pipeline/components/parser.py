@@ -3,17 +3,29 @@ from typing import Any
 
 
 class Parser:
+    """
+    Base class for parser. A helper class for deserializing 
+    datatypes from string.
+    """
+    def __new__(cls, data: str) -> Any:
+        """
+        A helper class for deserializing 
+        datatypes from string.
 
-    @classmethod
-    def run(cls, data: Any) -> Any:
+        Args:
+            data (str): Data to be deserialized from string.
+        """
         return cls._deserialize(data)
 
     @classmethod
-    def _deserialize(cls, data: Any) -> Any:
+    def _deserialize(cls, data: str) -> Any:
         pass
 
 
 class JSONParser(Parser):
+    """
+    A parser for stringified JSON data.
+    """
 
     # OVERRIDE
     @classmethod

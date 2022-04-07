@@ -38,6 +38,7 @@ class Pipeline:
 
         Args:
             port (int): Desired host port.
+            host (str): Desired hostname or host ip.
         """
         print(
             '\u001b[38;5;196m' + # Make console text red
