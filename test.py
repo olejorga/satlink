@@ -115,9 +115,15 @@ klienten, med navn “product” og verdien “visited”.
 """
 
 @app.get('/product')
-def receipt_view(req):
+def product_view(req):
     res = Response()
     res.set_cookie('product', 'visited')
+    return res
+
+@app.get('/delete')
+def x(req):
+    res = Response()
+    res.remove_cookie('product')
     return res
 
 """
@@ -131,14 +137,6 @@ injisert variabel som skal settes til “Armin”.
 @app.get('/')
 def index_view(req):
     return TemplateResponse('index.html', {'name': 'Armin'})
-
-"""
-SCENARIO X
-"""
-
-@app.get('/error')
-def error_view(req):
-    return Error(404).response
 
 """
 STARTING THE APP FOR ALL SCENARIOS

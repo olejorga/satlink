@@ -6,13 +6,13 @@ class Router:
     def __init__(self) -> None:
         self.__routes = []
 
-    def add_route(self, pattern: str, handler: Callable) -> None:
-        self.__routes.append((pattern, handler))
+    def add_route(self, pattern: str, controller: Callable) -> None:
+        self.__routes.append((pattern, controller))
 
     def match(self, path: str) -> tuple:
         path = path[:-1] if path.endswith('/') and path != "/" else path
 
-        for (pattern, handler) in self.__routes:
+        for (pattern, controller) in self.__routes:
             keys = pattern.split('/')[1:]
             values = path.split('/')[1:]
 
@@ -27,7 +27,7 @@ class Router:
                         break
 
                     if i == len(keys) - 1:
-                        return (handler, params)
+                        return (controller, params)
                 else:
                     break
                 continue

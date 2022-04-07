@@ -1,3 +1,6 @@
+from wsgiref.handlers import format_date_time
+from time import mktime
+from datetime import datetime, timedelta
 from http import cookies
 from http.client import responses as HTTP_STATUSES
 from wsgiref.headers import Headers
@@ -32,6 +35,10 @@ class Response:
         status_message = HTTP_STATUSES.get(self._status, 'UNKNOWN')
         return f"{self._status} {status_message}"
 
+    @status.setter
+    def status(self, status: int) -> str:
+        self._status = status
+
     def __iter__(self):
         for k in self.body:
             if isinstance(k, bytes):
@@ -43,14 +50,23 @@ class Response:
         self._status = 301
         self.headers.add_header('Location', url)
 
-    def set_cookie(self, token: str, value: str) -> None:
+    def set_cookie(
+        self, 
+        token: str, 
+        value: str, 
+        expires: datetime = datetime.now() + timedelta(days=42)
+    ) -> None:
         cookie = cookies.SimpleCookie()
         cookie[token] = value
+        cookie_str = cookie.output(header='')
+        stamp = mktime(expires.timetuple())
+        expires_str = format_date_time(stamp)
 
-        self.headers.add_header('Set-Cookie', cookie.output(header=''))
+        self.headers.add_header('Set-Cookie', f'{cookie_str}; Expires={expires_str}')
 
     def remove_cookie(self, token: str) -> None:
-        self.set_cookie(token, '')
+        expires = datetime(1970, 1, 1)
+        self.set_cookie(token, '', expires)
 
 
 class JSONResponse(Response):

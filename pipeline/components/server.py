@@ -17,18 +17,18 @@ class Server:
             method = environ['REQUEST_METHOD']
 
             if method == "GET":
-                handler, params = cls.get_router.match(environ['PATH_INFO'])
+                controller, params = cls.get_router.match(environ['PATH_INFO'])
             elif method == "POST":
-                handler, params = cls.post_router.match(environ['PATH_INFO'])
+                controller, params = cls.post_router.match(environ['PATH_INFO'])
             elif method == "PUT":
-                handler, params = cls.put_router.match(environ['PATH_INFO'])
+                controller, params = cls.put_router.match(environ['PATH_INFO'])
             elif method == "DELETE":
-                handler, params = cls.delete_router.match(environ['PATH_INFO'])
+                controller, params = cls.delete_router.match(environ['PATH_INFO'])
             else:
                 raise Error(500, f"HTTP method not supported for route {environ['PATH_INFO']}")
             
             request = Request(environ, params)
-            response = handler(request)
+            response = controller(request)
             
         except Error as err:
             print(err)

@@ -74,8 +74,8 @@ class Pipeline:
         Returns:
             (Callable): Takes a controller as its only argument.
         """
-        def inner(handler: Callable[[Request], Response]):
-            self.__get_router.add_route(route, handler)
+        def inner(controller: Callable[[Request], Response]):
+            self.__get_router.add_route(route, controller)
 
         return inner
 
@@ -90,8 +90,8 @@ class Pipeline:
         Returns:
             (Callable): Takes a controller as its only argument.
         """
-        def inner(handler: Callable[[Request], Response]):
-            self.__post_router.add_route(route, handler)
+        def inner(controller: Callable[[Request], Response]):
+            self.__post_router.add_route(route, controller)
 
         return inner
 
@@ -106,8 +106,8 @@ class Pipeline:
         Returns:
             (Callable): Takes a controller as its only argument.
         """
-        def inner(handler: Callable[[Request], Response]):
-            self.__put_router.add_route(route, handler)
+        def inner(controller: Callable[[Request], Response]):
+            self.__put_router.add_route(route, controller)
 
         return inner
 
@@ -122,7 +122,7 @@ class Pipeline:
         Returns:
             (Callable): Takes a controller as its only argument.
         """
-        def inner(handler: Callable[[Request], Response]):
-            self.__delete_router.add_route(route, handler)
+        def inner(controller: Callable[[Request], Response]):
+            self.__delete_router.add_route(route, controller)
 
         return inner
