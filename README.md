@@ -1,4 +1,4 @@
-![logo](pipline/docs/logo.svg)
+![logo](pipeline/docs/logo.svg)
 
 # Pipeline (WIP)
 
