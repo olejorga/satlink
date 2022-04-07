@@ -19,7 +19,7 @@
     Lykke til!
 '''
 
-from pipeline import Pipeline, Response, JSONResponse, JSONParser, TemplateResponse, Error
+from pipeline import Pipeline, Response
 
 """
 SCENARIO 1
@@ -28,11 +28,7 @@ Lag en webapplikasjon på port 3000 med et endepunkt “/”,
 som returnerer teksten: “Hello World!”.
 """
 
-app = Pipeline()
-
-@app.get('/')
-def index_view(req):
-    return Response('Hello World!')
+# KODE
 
 """
 SCENARIO 2
@@ -41,11 +37,7 @@ Lag et endepunkt “/users” som returnerer en liste av brukere,
 i form av et array av json objekter.
 """
 
-users = [{'name': 'Thomas'}, {'name': 'Arthur'}]
-
-@app.get('/users')
-def users_view(req):
-    return JSONResponse(users)
+# KODE
 
 """
 SCENARIO 3
@@ -56,11 +48,7 @@ lagt til, skal endepunktet returnere teksten “User created!” og
 statuskoden 201. Brukeren er et json objekt.
 """
 
-@app.post('/users')
-def create_user(req):
-    user = JSONParser.run(req.body)
-    users.append(user)
-    return Response('User created!', 201)
+# KODE
 
 """
 SCENARIO 4
@@ -71,10 +59,7 @@ en liste av brukere med korresponderende index. Brukeren er et
 json objekt.
 """
 
-@app.get('/users/(index)')
-def read_users(req):
-    index = int(req.params['index'])
-    return JSONResponse(users[index])
+# KODE
 
 """
 SCENARIO 5
@@ -84,10 +69,7 @@ fra nettadressen (?q=), og returnerer teksten: “You searched
 for (q)”.
 """
 
-@app.get('/search')
-def search_view(req):
-    q = req.query['q']
-    return Response(f'You searched for {q}')
+# KODE 
 
 """
 SCENARIO 6
@@ -97,15 +79,7 @@ endepunktet omdirigerer brukeren til det andre. Endepunkt
 “/receipt” skal returnere teksten: “Here is your receipt!”.
 """
 
-@app.get('/pay')
-def pay_view(req):
-    res = Response()
-    res.redirect('/receipt')
-    return res
-
-@app.get('/receipt')
-def receipt_view(req):
-    return Response('Here is your receipt!')
+# KODE 
 
 """
 SCENARIO 7
@@ -114,11 +88,7 @@ Lag et endepunkt “/product” som lagrer en cookie hos
 klienten, med navn “product” og verdien “visited”. 
 """
 
-@app.get('/product')
-def receipt_view(req):
-    res = Response()
-    res.set_cookie('product', 'visited')
-    return res
+# KODE
 
 """
 SCENARIO 8
@@ -128,21 +98,4 @@ med innhold: “<h1>Hello {name}!</h1>”, hvor “name” er en
 injisert variabel som skal settes til “Armin”.
 """
 
-@app.get('/')
-def index_view(req):
-    return TemplateResponse('index.html', {'name': 'Armin'})
-
-"""
-SCENARIO X
-"""
-
-@app.get('/error')
-def error_view(req):
-    return Error(404).response
-
-"""
-STARTING THE APP FOR ALL SCENARIOS
-ON PORT 3000
-"""
-
-app.run()
+# KODE

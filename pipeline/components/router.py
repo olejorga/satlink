@@ -1,5 +1,5 @@
-from shutil import ExecError
 from typing import Callable
+from .error import Error
 
 
 class Router:
@@ -32,4 +32,4 @@ class Router:
                     break
                 continue
         
-        raise Exception(f"No controller found for route {path}")
+        raise Error(404, f"No controller found for route {path}")

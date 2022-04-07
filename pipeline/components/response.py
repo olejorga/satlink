@@ -23,6 +23,10 @@ class Response:
     def body(self) -> str:
         return str(self._body)
 
+    @body.setter
+    def body(self, body: str):
+        self._body = str(body)
+
     @property
     def status(self) -> str:
         status_message = HTTP_STATUSES.get(self._status, 'UNKNOWN')

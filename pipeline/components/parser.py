@@ -14,10 +14,6 @@ class Parser:
 
 
 class JSONParser(Parser):
-    
-    @classmethod
-    def __init__(cls, data: str) -> dict | list:
-        return super().run(data)
 
     # OVERRIDE
     @classmethod

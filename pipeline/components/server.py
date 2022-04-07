@@ -2,6 +2,7 @@ from typing import Callable
 from .request import Request
 from .response import Response
 from .router import Router
+from .error import Error
 
 
 class Server:
@@ -24,14 +25,14 @@ class Server:
             elif method == "DELETE":
                 handler, params = cls.delete_router.match(environ['PATH_INFO'])
             else:
-                raise Exception(f"HTTP method not supported for route {environ['PATH_INFO']}")
+                raise Error(500, f"HTTP method not supported for route {environ['PATH_INFO']}")
             
             request = Request(environ, params)
             response = handler(request)
             
-        except Exception as e:
-            print(e)
-            response = Response('NOT FOUND!', 404)
+        except Error as err:
+            print(err)
+            response = err.response
 
         start_response(response.status, response.headers.items())
 
