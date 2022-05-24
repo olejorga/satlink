@@ -7,11 +7,14 @@ from .components.core.server import Server
 
 
 LOGO = """
-        ____  ________  ________    _____   ________
-       / __ \/  _/ __ \/ ____/ /   /  _/ | / / ____/
-      / /_/ // // /_/ / __/ / /    / //  |/ / __/   
-     / ____// // ____/ /___/ /____/ // /|  / /___   
-    /_/   /___/_/   /_____/_____/___/_/ |_/_____/   
+     _____ _            _ _             
+    |  __ (_)          | (_)            
+    | |__) | _ __   ___| |_ _ __   ___  
+    |  ___/ | '_ \ / _ \ | | '_ \ / _ \ 
+    | |   | | |_) |  __/ | | | | |  __/ 
+    |_|   |_| .__/ \___|_|_|_| |_|\___| 
+            | |                         
+            |_|                         
 """
 
 
@@ -41,7 +44,7 @@ class Pipeline:
             host (str): Desired hostname or host ip.
         """
         print(
-            '\u001b[38;5;196m' + # Make console text red
+            '\u001b[38;5;39m' + # Make console text blue
             LOGO +
             '\u001b[0m' + # Reset console text styling
             Pipeline.__doc__
