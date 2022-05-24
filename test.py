@@ -1,25 +1,27 @@
 '''
-        ____  ________  ________    _____   ________
-       / __ \/  _/ __ \/ ____/ /   /  _/ | / / ____/
-      / /_/ // // /_/ / __/ / /    / //  |/ / __/   
-     / ____// // ____/ /___/ /____/ // /|  / /___   
-    /_/   /___/_/   /_____/_____/___/_/ |_/_____/   
-       ___  ___  __  ____ _________  ____________________
-      / _ )/ _ \/ / / / //_/ __/ _ \/_  __/ __/ __/_  __/
-     / _  / , _/ /_/ / ,< / _// , _/ / / / _/_\ \  / /   
-    /____/_/|_|\____/_/|_/___/_/|_| /_/ /___/___/ /_/   2                                                                      
+     _____ _            _ _             
+    |  __ (_)          | (_)            
+    | |__) | _ __   ___| |_ _ __   ___  
+    |  ___/ | '_ \ / _ \ | | '_ \ / _ \ 
+    | |   | | |_) |  __/ | | | | |  __/ 
+    |_|   |_| .__/ \___|_|_|_| |_|\___| 
+            | |                         
+            |_|                    DEMO
 
-    Skriv kode som løser hvert scenario, bruk API 
-    dokumentasjonen i docs/API.md, docstrings og type hints 
-    som hjelp. Hvis dere står helt fast, spør utvikler.
-
-    Anbefaler å bruke Postman, Insomnia eller Thunder 
-    Client i VS Code til å teste endepunktene.
-
-    Lykke til!
+    En enkel demonstrasjon som viser 
+    hvordan rammverket løser de ulike 
+    scenarioene beskrevet i rapporten.
 '''
 
-from pipeline import Pipeline, Response, JSONResponse, JSONParser, TemplateResponse, Error
+"""
+Først må vi importere relevante komponenter 
+fra rammverket.
+
+Alternativ import måte:
+    from pipeline.components.responses import JSONResponse
+    from pipeline.components.parser import JSONParser
+"""
+from pipeline import Pipeline, Response, JSONResponse, JSONParser, TemplateResponse
 
 """
 SCENARIO 1
