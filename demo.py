@@ -43,7 +43,7 @@ Lag et endepunkt “/users” som returnerer en liste av brukere,
 i form av et array av json objekter.
 """
 
-users = [{'name': 'Thomas'}, {'name': 'Arthur'}]
+users = [{'name': 'Armin'}, {'name': 'Sebastián'}]
 
 @app.get('/users')
 def users_view(req):
@@ -125,14 +125,16 @@ def product_view(req):
 """
 SCENARIO 8
 
-Lag et endepunkt “/” som returnerer en html fil “index.html”, 
-med innhold: “<h1>Hello {name}!</h1>”, hvor “name” er en 
-injisert variabel som skal settes til “Armin”.
+Lag et endepunkt “/greeting” som returnerer en html fil 
+“greeting.html”, med innhold: “<h1>Hello {name}!</h1>”, 
+hvor “name” er en injisert variabel som skal settes til 
+“Armin”.
 """
 
-@app.get('/greeting') # <-- Felle for å vise feilhåndtering, endrer derfor route til "/greeting"
+@app.get('/greeting')
 def greeting_view(req):
-    return TemplateResponse('greeting.html', {'name': 'Armin'})
+    vars = {'name': 'Armin'}
+    return TemplateResponse('greeting.html', vars)
 
 """
 STARTING THE APP FOR ALL SCENARIOS
