@@ -6,7 +6,7 @@
     | |   | | |_) |  __/ | | | | |  __/ 
     |_|   |_| .__/ \___|_|_|_| |_|\___| 
             | |                         
-            |_|                         
+            |_|   A light web framework
 </pre>
 
 # Pipeline
@@ -53,14 +53,23 @@ Inside the downloaded zip file, there is a folder named "pipeline". This is the 
    ```
 4. Now, populate the app.py file with the following code:
    ```python
-   x = 1
+   from lib.pipeline import Pipeline, Response
+   
+   app = Pipeline()
+   
+   @app.get('/')
+   def index_view(req):
+       return Response('Hello World!')
+   
+   app.run()
    ```
 5. Lastly, let's start our web application.
    ```console
    python3 app.py
    ```
+   When you visit [http://localhost:3000/](http://localhost:3000/) you should see the text "Hello World!".
 
-To learn more, [look at the API documentation](https://github.com/olejorga/pipeline/wiki).
+To learn more, take a look at the [API documentation](https://github.com/olejorga/pipeline/wiki).
 
 ### Disclaimer
 
