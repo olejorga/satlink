@@ -62,6 +62,11 @@ Inside the downloaded zip file, there is a folder named "pipeline". This is the 
        return Response('Hello World!')
    
    app.run()
+   
+   """
+   Alternatively, you may specify a port and/or hostname:
+   app.run(8080, 'localhost')
+   """
    ```
 5. Lastly, let's start our web application.
    ```console
