@@ -76,6 +76,8 @@ Inside the downloaded zip file, there is a folder named "pipeline". This is the 
 
 To learn more, take a look at the [API documentation](https://github.com/olejorga/pipeline/wiki).
 
+Or, to read about the design process, have a look at the [project report](report.pdf) (norwegian).
+
 ### Disclaimer
 
 _If this project did use a package manager like pip. Installation would be as easy as typing `pip install pipeline`, which means you could skip step 2 of the tutorial, and import the framework by just typing `import pipeline`._
