@@ -8,17 +8,9 @@
 
 * There are almost none! 
 * Satlink uses only bits from the Python Standard Library. 
-* All you need is Python 3.7 or greater.
+* All you need is Python 3.11 or greater.
 
 ### Installation
-
-Since Pipline is not yet published on any python package index, such as pip, you will have to download the source code manually. This can be done via the link below.
-
-[**Download now**](https://github.com/olejorga/satlink/archive/refs/heads/main.zip)
-
-Inside the downloaded zip file, there is a folder named "satlink". This is the framework itself. In your project you will have to import the framework from this folder. Below you'll find a short tutorial on how set up a basic project.
-
-### Your first project
 
 1. Start by installing the package from pip.
    ```console
