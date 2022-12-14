@@ -1,7 +1,7 @@
 from urllib.parse import parse_qs
-from components.downlink import Downlink
-from components.houston import Houston
-from components.uplink import Method, Uplink
+from .downlink import Downlink
+from .houston import Houston
+from .uplink import Method, Uplink
 
 
 def server(endpoints):

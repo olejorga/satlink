@@ -1,4 +1,4 @@
-# 🛰 SATLINK
+# 🛰 Satlink
 
 > Let me introduce Satlink. Satlink is a light web framework, that aims to be _**easy to get started with**_, _**easy to build in**_ and _**easy to grow in**_, by focusing on core design principles, such as _"Low Barrier to Entry"_ and _"Self-documenting code"_. This framework was part of a project in Frameworks at HiØ, written with love in Python <3
 

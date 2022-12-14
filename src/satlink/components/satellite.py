@@ -1,6 +1,6 @@
 from wsgiref.simple_server import make_server
-from components.server import server
-from components.uplink import Method
+from .server import server
+from .uplink import Method
 
 
 class Satellite:

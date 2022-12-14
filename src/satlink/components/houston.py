@@ -1,4 +1,4 @@
-from components.downlink import Downlink
+from .downlink import Downlink
 
 
 class Houston(Exception):

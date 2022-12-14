@@ -1,5 +1,4 @@
-from components.downlink import Downlink
-from main import Satellite
+from src.satlink import Satellite
 
 
 api = Satellite()
