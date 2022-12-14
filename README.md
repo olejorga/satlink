@@ -22,7 +22,7 @@
    ```
 4. Now, populate the app.py file with the following code:
    ```python
-   from lib.satlink.main import Satellite
+   from satlink import Satellite
    
    app = Satellite()
    
