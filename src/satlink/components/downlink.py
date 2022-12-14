@@ -5,7 +5,7 @@ class Downlink:
     def __init__(self):
         self.body = ""
         self.status = "200 "
-        self.headers = [("Content-type", "text/plain; charset=utf-8")]
+        self.headers = []
 
     def __iter__(self):
         for b in self.body:

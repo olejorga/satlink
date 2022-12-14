@@ -13,16 +13,16 @@
 ### Installation
 
 1. Start by installing the package from pip.
-   ```console
+   ```bash
    pip install satlink
    ```
 2. Let's create a file called `app.py`.
-   ```console
+   ```bash
    touch app.py
    ```
 4. Now, populate the app.py file with the following code:
    ```python
-   from lib.satlink.main import Satellite
+   from satlink import Satellite
    
    app = Satellite()
    
@@ -31,14 +31,12 @@
        return downlink.text('Hello, World!')
    
    app.transmit()
-   
-   """
-   Alternatively, you may specify a port and/or hostname:
-   app.transmit(8080, 'localhost')
-   """
+
+   # Alternatively, you may specify a port and/or hostname:
+   # app.transmit(3000, 'localhost')
    ```
 5. Lastly, let's start our application.
-   ```console
+   ```bash
    python3 app.py
    ```
    When you visit [http://localhost:3000/](http://localhost:3000/) you should see the text "Hello, World!".
