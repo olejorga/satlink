@@ -1,12 +1,12 @@
 from src.satlink import Satellite
 
 
-api = Satellite()
+sat = Satellite()
 
 
-@api.get("/")
+@sat.get("/")
 def index(uplink, downlink):
     return downlink.text("Hello, World!")
 
 
-api.transmit(3000)
+sat.transmit(3000)
