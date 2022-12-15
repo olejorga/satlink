@@ -1,11 +1,13 @@
+from typing import Callable, Dict, List, Tuple
 from urllib.parse import parse_qs
+from .type import Endpoint
 from .downlink import Downlink
 from .houston import Houston
 from .uplink import Method, Uplink
 
 
-def server(endpoints):
-    def inner(environ, start_response):
+def server(endpoints: List[Endpoint]):
+    def inner(environ: Dict, start_response: Callable):
         try:
             handler, query = match(environ, endpoints)
             downlink = handler(Uplink(environ, query), Downlink())
@@ -20,7 +22,7 @@ def server(endpoints):
     return inner
 
 
-def match(environ, endpoints):
+def match(environ: Dict, endpoints: List[Endpoint]):
     method = Method[environ['REQUEST_METHOD']]
     path = environ['PATH_INFO']
     path = path[:-1] if path.endswith('/') and path != "/" else path
@@ -29,7 +31,7 @@ def match(environ, endpoints):
     query = {k: v[0] for k, v in params.items()}
 
     endpoints = [
-        (m, r, h, r.split('/')[1:]) 
+        (m, r, h, r.split('/')[1:])
         for (m, r, h) in endpoints
         if m == method and len(r.split('/')[1:]) == len(values)
     ]
@@ -40,7 +42,7 @@ def match(environ, endpoints):
         for (m, r, h, k) in endpoints:
             if k[i].startswith('[') and k[i].endswith(']'):
                 exact = [
-                    (m, r, h, k) 
+                    (m, r, h, k)
                     for (m, r, h, k) in endpoints
                     if (k[i] == value)
                 ]
@@ -57,6 +59,7 @@ def match(environ, endpoints):
         return (matches[0][2], query)
 
     raise Houston("This route is not handled!")
+
 
 """
 def match(environ, endpoints):

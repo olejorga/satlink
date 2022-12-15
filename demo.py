@@ -1,11 +1,11 @@
-from src.satlink import Satellite
+from src.satlink import Satellite, Uplink, Downlink
 
 
 sat = Satellite()
 
 
 @sat.get("/")
-def index(uplink, downlink):
+def index(uplink: Uplink, downlink: Downlink):
     return downlink.text("Hello, World!")
 
 

@@ -1,4 +1,6 @@
+from typing import List
 from wsgiref.simple_server import make_server
+from .type import Endpoint, Handler
 from .server import server
 from .uplink import Method
 
@@ -34,26 +36,26 @@ class Satellite:
     """
 
     def __init__(self):
-        self.endpoints = []
+        self.endpoints: List[Endpoint] = []
 
-    def get(self, route):
+    def get(self, route: str):
         return self.__endpoint(Method.GET, route)
 
-    def post(self, route):
+    def post(self, route: str):
         return self.__endpoint(Method.POST, route)
 
-    def put(self, route):
+    def put(self, route: str):
         return self.__endpoint(Method.PUT, route)
 
-    def patch(self, route):
+    def patch(self, route: str):
         return self.__endpoint(Method.PATCH, route)
 
-    def delete(self, route):
+    def delete(self, route: str):
         return self.__endpoint(Method.DELETE, route)
 
-    def __endpoint(self, method, route):
-        def inner(controller):
-            self.endpoints.append((method, route, controller))
+    def __endpoint(self, method: Method, route: str):
+        def inner(handler: Handler):
+            self.endpoints.append((method, route, handler))
 
         return inner
 
