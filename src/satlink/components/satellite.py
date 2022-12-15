@@ -60,11 +60,12 @@ class Satellite:
     def transmit(self, port=3000, host="localhost"):
         print(LOGO)
         print(Satellite.__doc__)
-        print('\u001b[38;5;246m')
+        print('\u001b[38;5;246m') # Mute terminal text color.
 
         try:
             with make_server(host, port, server(self.endpoints)) as app:
                 app.serve_forever()
                 print(f"Satellite listening on http://{host}:{port}")
         except KeyboardInterrupt:
+            print('\u001b[0m') # Reset terminal text color.
             app.server_close()
