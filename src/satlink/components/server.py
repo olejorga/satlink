@@ -24,6 +24,47 @@ def match(environ, endpoints):
     method = Method[environ['REQUEST_METHOD']]
     path = environ['PATH_INFO']
     path = path[:-1] if path.endswith('/') and path != "/" else path
+    values = path.split('/')[1:]
+    params = parse_qs(environ['QUERY_STRING'])
+    query = {k: v[0] for k, v in params.items()}
+
+    endpoints = [
+        (m, r, h, r.split('/')[1:]) 
+        for (m, r, h) in endpoints
+        if m == method and len(r.split('/')[1:]) == len(values)
+    ]
+
+    matches = endpoints.copy()
+
+    print(matches)
+
+    for i, value in enumerate(values):
+        for (m, r, h, k) in endpoints:
+            if k[i].startswith('[') and k[i].endswith(']'):
+                exact = [
+                    (m, r, h, k) 
+                    for (m, r, h, k) in endpoints
+                    if (k[i] == value)
+                ]
+
+                if (len(exact) > 0):
+                    matches.remove((m, r, h, k))
+                else:
+                    query[r[2:-1]] = value
+
+            elif k[i] != value:
+                matches.remove((m, r, h, k))
+
+    if (len(matches) > 0):
+        return (matches[0][2], query)
+
+    raise Houston("This route is not handled!")
+
+"""
+def match(environ, endpoints):
+    method = Method[environ['REQUEST_METHOD']]
+    path = environ['PATH_INFO']
+    path = path[:-1] if path.endswith('/') and path != "/" else path
 
     for (mode, route, handler) in endpoints:
         keys = route.split('/')[1:]
@@ -48,3 +89,4 @@ def match(environ, endpoints):
             continue
 
     raise Houston("This route is not handled!")
+"""
