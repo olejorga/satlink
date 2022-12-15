@@ -42,6 +42,12 @@ class Downlink:
 
         return self
 
+    def redirect(self, url):
+        self.header("Location", url)
+        self.code(301)
+
+        return self
+
     def cookie(self, name, value, expires=datetime.now() + timedelta(days=42)):
         expires = mktime(expires.timetuple())
         expires = format_date_time(expires)
