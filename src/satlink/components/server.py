@@ -36,8 +36,6 @@ def match(environ, endpoints):
 
     matches = endpoints.copy()
 
-    print(matches)
-
     for i, value in enumerate(values):
         for (m, r, h, k) in endpoints:
             if k[i].startswith('[') and k[i].endswith(']'):
