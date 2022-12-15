@@ -33,7 +33,7 @@ sat = Satellite()
 
 @sat.get("/")
 def index(uplink, downlink):
-      return downlink.text("Hello, World!")
+  return downlink.text("Hello, World!")
 
 sat.transmit()
 # Alternatively: sat.transmit(3000, "localhost")
