@@ -1,4 +1,7 @@
+from datetime import timedelta, datetime
 import json
+from time import mktime
+from wsgiref.handlers import format_date_time
 
 
 class Downlink:
@@ -25,7 +28,7 @@ class Downlink:
         return self
 
     def content(self, type):
-        self.header("Content-type", type)
+        self.header("Content-Type", type)
 
     def json(self, data):
         self.content("application/json")
@@ -38,3 +41,13 @@ class Downlink:
         self.body = str(data)
 
         return self
+
+    def cookie(self, name, value, expires=datetime.now() + timedelta(days=42)):
+        expires = mktime(expires.timetuple())
+        expires = format_date_time(expires)
+        self.header("Set-Cookie", f"{name}={value}; Expires={expires}")
+
+        return self
+
+    def eat(self, name):
+        return self.cookie(name, '', datetime(1970, 1, 1))
