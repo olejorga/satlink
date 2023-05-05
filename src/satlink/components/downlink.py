@@ -1,5 +1,8 @@
+from datetime import datetime, timedelta
 import json
+from time import mktime
 from typing import Dict, List, Tuple
+from wsgiref.handlers import format_date_time
 from wsgiref.types import StartResponse
 
 
@@ -44,4 +47,21 @@ class Downlink:
     self.__start_response(self.__status, self.__headers)
     self.__body = json.dumps(data)
 
+    return self
+  
+  def redirect(self, url: str):
+    self.header('Location', url)
+    self.code(301)
+
+    return self
+
+  def remember(self, name: str, value: str, expires=datetime.now() + timedelta(days=42)):
+    expires = mktime(expires.timetuple())
+    expires = format_date_time(expires)
+    self.header('Set-Cookie', f'{name}={value}; Expires={expires}')
+
+    return self
+
+  def forget(self, name: str):
+    self.remember(name, '', datetime(1970, 1, 1))
     return self
