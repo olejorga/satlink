@@ -4,9 +4,9 @@ from src.satlink import Satellite, Uplink, Downlink
 sat = Satellite()
 
 
-@sat.get("/")
+@sat.datalink("/")
 def index(uplink: Uplink, downlink: Downlink):
-    return downlink.text("Hello, World!")
+    return downlink.text("Hello, Earth!")
 
 
-sat.transmit(3000)
+sat.transmit()
