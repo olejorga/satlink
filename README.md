@@ -45,13 +45,13 @@ touch sat.py
 
 Step 4: Now, populate the sat.py file with the following code:
 ```python
-from satlink import Satellite
+from satlink import Satellite, Uplink, Downlink
 
 sat = Satellite()
 
 @sat.datalink("/")
-def index(uplink, downlink):
-  return downlink.text("Hello, Earth!")
+def index(uplink: Uplink, downlink: Downlink):
+  return downlink.text('Hello, Earth!')
 
 sat.transmit()
 ```
