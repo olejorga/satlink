@@ -6,4 +6,4 @@ python3 -m pip install --upgrade twine
 
 # Build & upload
 python3 -m build
-python3 -m twine upload --repository satlink dist/*
+python3 -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*

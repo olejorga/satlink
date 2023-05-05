@@ -49,18 +49,17 @@ from satlink import Satellite
 
 sat = Satellite()
 
-@sat.get("/")
+@sat.datalink("/")
 def index(uplink, downlink):
-  return downlink.text("Hello, World!")
+  return downlink.text("Hello, Earth!")
 
 sat.transmit()
-# Alternatively: sat.transmit(3000, "localhost")
 ```
 
 Step 5: Lastly, let's boot up our satellite.
 ```bash
 python3 sat.py
 ```
-When you visit [http://localhost:3000/](http://localhost:3000/) you should see the text "Hello, World!".
+When you visit [http://localhost:3000/](http://localhost:3000/) you should see the text "Hello, Earth!".
 
 To learn more, take a look at the [API documentation](https://github.com/olejorga/satlink/wiki).
