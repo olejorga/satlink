@@ -51,7 +51,7 @@ class Downlink:
   
   def redirect(self, url: str):
     self.header('Location', url)
-    self.code(301)
+    self.status(301)
 
     return self
 
